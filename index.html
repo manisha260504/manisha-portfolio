@@ -1,232 +1,1688 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Manisha S | UI/UX Designer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manisha | UI Interactive Animator & UI/UX Designer</title>
+  <meta name="description" content="Portfolio of Manisha - UI Interactive Animator and UI/UX Designer specializing in mobile applications and animated websites.">
+  <meta name="author" content="Manisha">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = { darkMode: 'class' }
-</script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
 
-<style>
-body { font-family: Inter, system-ui, sans-serif; cursor: none; }
+  <style>
+    /* =============================================
+       DESIGN TOKENS & VARIABLES
+    ============================================= */
+    :root {
+      --bg: #080c14;
+      --bg-card: #0e1422;
+      --bg-secondary: #111827;
+      --royal-purple: #7C5CBF;
+      --royal-purple-light: #9B7FD4;
+      --royal-cyan: #22D3EE;
+      --royal-cyan-light: #67E8F9;
+      --foreground: #F1F5F9;
+      --muted: #94A3B8;
+      --border: rgba(255,255,255,0.08);
+      --gradient: linear-gradient(90deg, #7C5CBF 0%, #22D3EE 100%);
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'DM Sans', sans-serif;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-/* Glassmorphism */
-.glass {
-  backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.18);
-}
-.dark .glass {
-  background: rgba(255,255,255,0.08);
-}
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* Animated Cursor */
-.cursor {
-  width: 18px;
-  height: 18px;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-}
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
 
-/* Reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: all .9s ease;
-}
-.reveal.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--foreground);
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* =============================================
+       UTILITY CLASSES
+    ============================================= */
+    .section-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .gradient-text {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .gradient-border {
+      position: relative;
+    }
+
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: var(--gradient);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: var(--gradient);
+      color: white;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      font-family: var(--font-body);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(124, 92, 191, 0.4);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--foreground);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+      font-family: var(--font-body);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(124, 92, 191, 0.5);
+      color: var(--royal-purple-light);
+      transform: translateY(-2px);
+    }
+
+    .skill-card {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .section-label {
+      display: inline-block;
+      color: var(--royal-purple-light);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* =============================================
+       FLOATING BLOBS (background ambiance)
+    ============================================= */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      pointer-events: none;
+    }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(8, 12, 20, 0.8);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      position: relative;
+      transition: color var(--transition);
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--royal-purple);
+      transition: width var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--foreground);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--foreground);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+
+    /* Mobile nav */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: rgba(8, 12, 20, 0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      z-index: 99;
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .mobile-menu a {
+      color: var(--muted);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    /* =============================================
+       HERO SECTION
+    ============================================= */
+    #home {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    #home .blob-1 {
+      width: 500px;
+      height: 500px;
+      background: rgba(124, 92, 191, 0.18);
+      top: 15%;
+      left: -150px;
+      animation: blobFloat 14s ease-in-out infinite alternate;
+    }
+
+    #home .blob-2 {
+      width: 500px;
+      height: 500px;
+      background: rgba(34, 211, 238, 0.12);
+      bottom: 10%;
+      right: -150px;
+      animation: blobFloat 14s ease-in-out 2s infinite alternate-reverse;
+    }
+
+    #home .blob-3 {
+      width: 700px;
+      height: 700px;
+      background: rgba(124, 92, 191, 0.04);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 16px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(124, 92, 191, 0.1);
+      border: 1px solid rgba(124, 92, 191, 0.3);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    .hero-badge svg {
+      color: var(--royal-purple-light);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color var(--transition);
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    .scroll-down:hover {
+      color: var(--foreground);
+    }
+
+    /* =============================================
+       ABOUT SECTION
+    ============================================= */
+    #about {
+      padding: 112px 0;
+      position: relative;
+    }
+
+    .about-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .about-text span.highlight {
+      color: var(--foreground);
+      font-weight: 600;
+    }
+
+    .about-text span.cyan {
+      color: var(--royal-cyan);
+    }
+
+    .about-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .about-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .about-card-icon {
+      padding: 12px;
+      border-radius: 12px;
+      background: rgba(124, 92, 191, 0.1);
+      flex-shrink: 0;
+      transition: background var(--transition);
+    }
+
+    .about-card:hover .about-card-icon {
+      background: rgba(124, 92, 191, 0.2);
+    }
+
+    .about-card-icon svg {
+      color: var(--royal-purple-light);
+    }
+
+    .about-card-body h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .about-card-body p {
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    /* =============================================
+       SKILLS SECTION
+    ============================================= */
+    #skills {
+      padding: 112px 0;
+      background: rgba(14, 20, 34, 0.6);
+      position: relative;
+    }
+
+    .skills-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 72px;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .skill-item-icon {
+      padding: 12px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(124, 92, 191, 0.2), rgba(34, 211, 238, 0.08));
+      flex-shrink: 0;
+      transition: all var(--transition);
+    }
+
+    .skill-card:hover .skill-item-icon {
+      background: linear-gradient(135deg, rgba(124, 92, 191, 0.35), rgba(34, 211, 238, 0.18));
+    }
+
+    .skill-item-icon svg {
+      color: var(--royal-cyan);
+    }
+
+    .skill-item-body h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .skill-item-body p {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .tools-section {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .tools-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .tool-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .tool-bar-item {}
+
+    .tool-bar-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .tool-bar-header span:first-child {
+      font-weight: 500;
+    }
+
+    .tool-bar-header span:last-child {
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .tool-bar-track {
+      height: 8px;
+      background: var(--bg-secondary);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .tool-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--gradient);
+      transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* =============================================
+       PROJECTS SECTION
+    ============================================= */
+    #projects {
+      padding: 112px 0;
+      position: relative;
+    }
+
+    .projects-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .projects-header p {
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: 0.95rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+      border-color: rgba(124, 92, 191, 0.3);
+    }
+
+    .project-img-wrap {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--bg-secondary), #1a2035);
+    }
+
+    .project-img-wrap.portrait {
+      aspect-ratio: 3 / 4;
+    }
+
+    .project-img-wrap.landscape {
+      aspect-ratio: 16 / 9;
+    }
+
+    .project-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    .project-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8, 12, 20, 0.9), transparent, transparent);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .project-card:hover .project-img-overlay {
+      opacity: 1;
+    }
+
+    .project-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(8, 12, 20, 0.8);
+      backdrop-filter: blur(8px);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .project-badge svg {
+      flex-shrink: 0;
+    }
+
+    .project-badge.mobile svg { color: var(--royal-cyan); }
+    .project-badge.website svg { color: var(--royal-purple-light); }
+
+    .project-info {
+      padding: 24px;
+    }
+
+    .project-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      transition: color var(--transition);
+    }
+
+    .project-card:hover .project-info h3 {
+      color: var(--royal-cyan);
+    }
+
+    .project-info p {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--royal-purple-light);
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: color var(--transition);
+    }
+
+    .project-link:hover {
+      color: var(--royal-cyan);
+    }
+
+    .project-link svg {
+      transition: transform var(--transition);
+    }
+
+    .project-link:hover svg {
+      transform: translate(3px, -3px);
+    }
+
+    /* =============================================
+       CONTACT SECTION
+    ============================================= */
+    #contact {
+      padding: 112px 0;
+      background: rgba(14, 20, 34, 0.6);
+    }
+
+    .contact-header {
+      text-align: center;
+      margin-bottom: 72px;
+    }
+
+    .contact-header p {
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .contact-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-link-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      transition: var(--transition);
+    }
+
+    .contact-link-item:hover {
+      border-color: rgba(124, 92, 191, 0.4);
+      background: rgba(14, 20, 34, 0.8);
+    }
+
+    .contact-link-icon {
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(124, 92, 191, 0.1);
+      flex-shrink: 0;
+      transition: background var(--transition);
+    }
+
+    .contact-link-item:hover .contact-link-icon {
+      background: rgba(124, 92, 191, 0.2);
+    }
+
+    .contact-link-icon svg {
+      color: var(--royal-purple-light);
+    }
+
+    .contact-link-body p:first-child {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-bottom: 2px;
+    }
+
+    .contact-link-body p:last-child {
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color var(--transition);
+    }
+
+    .contact-link-item:hover .contact-link-body p:last-child {
+      color: var(--royal-cyan);
+    }
+
+    /* Contact Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--foreground);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--muted);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--royal-purple);
+      box-shadow: 0 0 0 3px rgba(124, 92, 191, 0.15);
+    }
+
+    .form-group textarea {
+      resize: none;
+      height: 140px;
+    }
+
+    .btn-submit {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      background: var(--gradient);
+      color: white;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-submit:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(124, 92, 191, 0.4);
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-inner p {
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .footer-credit {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-credit svg {
+      color: var(--royal-purple-light);
+      fill: var(--royal-purple-light);
+    }
+
+    /* =============================================
+       SCROLL REVEAL ANIMATION
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =============================================
+       KEYFRAME ANIMATIONS
+    ============================================= */
+    @keyframes blobFloat {
+      from { transform: translate(0, -20px); }
+      to   { transform: translate(0,  20px); }
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    @keyframes gradientShimmer {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 900px) {
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      .hero-title { font-size: 2.4rem; }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-gradient-to-br from-slate-100 to-neutral-200
-             dark:from-[#0b0f14] dark:to-[#121826]
-             text-neutral-900 dark:text-white transition-colors duration-500">
+<body>
 
-<div class="cursor" id="cursor"></div>
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav>
+    <div class="section-container nav-inner">
+      <a href="#home" class="nav-logo">Manisha</a>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-hamburger" aria-label="Toggle menu" id="hamburgerBtn">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
 
-<!-- THEME TOGGLE -->
-<button id="toggle"
-class="fixed bottom-6 right-6 z-50 px-6 py-3 rounded-full
-glass border border-white/20 shadow-xl font-medium">
-🌙 Dark Mode
-</button>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
+      <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+      <li><a href="#skills" onclick="closeMobileMenu()">Skills</a></li>
+      <li><a href="#projects" onclick="closeMobileMenu()">Projects</a></li>
+      <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+    </ul>
+  </div>
 
-<!-- HERO -->
-<section class="min-h-screen flex flex-col justify-center items-center text-center px-6 reveal">
-<h1 class="text-6xl md:text-8xl font-bold mb-6">Manisha S</h1>
-<p class="text-2xl text-gray-600 dark:text-gray-400 mb-6">
-UI / UX Designer
-</p>
-<p class="max-w-2xl text-lg text-gray-700 dark:text-gray-400">
-Beginner UI/UX designer skilled in Figma, Canva, and Illustrator —
-creating clean, modern and user-friendly designs.
-</p>
-</section>
+  <main>
 
-<!-- ABOUT -->
-<section class="py-32 px-6 reveal">
-<div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center glass p-12 rounded-[2.5rem] border border-white/20">
-<div>
-<h2 class="text-4xl font-bold mb-6">About Me</h2>
-<p class="text-gray-700 dark:text-gray-400 mb-4">
-I'm a beginner UI/UX Designer who enjoys creating clean, modern interfaces.
-</p>
-<p class="text-gray-700 dark:text-gray-400">
-I focus on color balance, spacing, and smooth user experience.
-Currently looking for a junior UI/UX opportunity.
-</p>
-</div>
-<div>
-<h3 class="text-2xl font-semibold mb-4">Skills & Tools</h3>
-<div class="flex flex-wrap gap-4">
-<span class="px-6 py-3 glass rounded-full">Figma</span>
-<span class="px-6 py-3 glass rounded-full">Canva</span>
-<span class="px-6 py-3 glass rounded-full">Adobe Illustrator</span>
-</div>
-</div>
-</div>
-</section>
+    <!-- ============================================================
+         HERO SECTION
+    ============================================================ -->
+    <section id="home">
+      <!-- Background blobs -->
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
 
-<!-- PROJECTS -->
-<section class="py-32 px-6 max-w-7xl mx-auto">
-<h2 class="text-5xl font-bold text-center mb-20 reveal">Selected Projects</h2>
+      <div class="hero-content reveal">
+        <!-- Badge -->
+        <div class="hero-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+            <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+          </svg>
+          UI Interactive Animator &amp; UI/UX Designer
+        </div>
 
-<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+        <!-- Title -->
+        <h1 class="hero-title">
+          <span style="color: var(--foreground);">Hi, I'm </span>
+          <span class="gradient-text">Manisha</span>
+        </h1>
 
-<!-- PROJECT CARD -->
-<div onclick="openModal('Ice Cream Landing Page','Playful landing page with smooth animations.','https://www.linkedin.com/posts/manisha-s-b005b3317_figma-ice-cream-website-landing-page-with-activity-7364592766946807808-CwHI')"
-class="glass rounded-3xl overflow-hidden cursor-pointer hover:-translate-y-4 transition reveal">
-<div class="h-60 flex items-center justify-center text-8xl bg-gradient-to-br from-pink-500 to-purple-600">🍦</div>
-<div class="p-8">
-<h3 class="text-2xl font-semibold mb-3">Ice Cream Landing Page</h3>
-<p class="text-gray-700 dark:text-gray-400">Playful UI with animation focus.</p>
-</div>
-</div>
+        <!-- Subtitle -->
+        <p class="hero-sub">Designing clean interfaces with meaningful interactions.</p>
 
-<div onclick="openModal('Cake Shop UI','Warm, aesthetic cake shop design.','https://www.linkedin.com/posts/manisha-s-b005b3317_i-am-glad-to-share-my-recent-project-as-a-activity-7366744515388366851-qUkr')"
-class="glass rounded-3xl overflow-hidden cursor-pointer hover:-translate-y-4 transition reveal">
-<div class="h-60 flex items-center justify-center text-8xl bg-gradient-to-br from-rose-500 to-orange-500">🎂</div>
-<div class="p-8">
-<h3 class="text-2xl font-semibold mb-3">Cake Shop UI</h3>
-<p class="text-gray-700 dark:text-gray-400">Elegant and cozy layout.</p>
-</div>
-</div>
+        <!-- CTA Buttons -->
+        <div class="hero-cta">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="#contact" class="btn-secondary">Contact Me</a>
+        </div>
+      </div>
 
-<div onclick="openModal('Chips Landing Page','Bold animated landing page.','https://www.linkedin.com/posts/manisha-s-b005b3317_i-recently-designed-and-animated-a-landing-activity-7375890838796550144-zNys')"
-class="glass rounded-3xl overflow-hidden cursor-pointer hover:-translate-y-4 transition reveal">
-<div class="h-60 flex items-center justify-center text-8xl bg-gradient-to-br from-yellow-400 to-red-500">🍟</div>
-<div class="p-8">
-<h3 class="text-2xl font-semibold mb-3">Chips Landing Page</h3>
-<p class="text-gray-700 dark:text-gray-400">High-energy visuals.</p>
-</div>
-</div>
+      <!-- Scroll Down -->
+      <a href="#about" class="scroll-down">
+        <span>Scroll Down</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>
+        </svg>
+      </a>
+    </section>
 
-<div onclick="openModal('Vehicle & Hotel Booking','Professional booking app UI.','https://www.linkedin.com/posts/manisha-s-b005b3317_i-have-designed-a-ticket-and-hotel-booking-activity-7386779502682464256-12FZ')"
-class="glass rounded-3xl overflow-hidden cursor-pointer hover:-translate-y-4 transition reveal">
-<div class="h-60 flex items-center justify-center text-8xl bg-gradient-to-br from-indigo-500 to-cyan-500">🚗</div>
-<div class="p-8">
-<h3 class="text-2xl font-semibold mb-3">Vehicle & Hotel Booking</h3>
-<p class="text-gray-700 dark:text-gray-400">Clear booking flow.</p>
-</div>
-</div>
+    <!-- ============================================================
+         ABOUT SECTION
+    ============================================================ -->
+    <section id="about">
+      <div class="section-container">
+        <!-- Header -->
+        <div class="about-header reveal">
+          <span class="section-label">About Me</span>
+          <h2 class="section-title">Crafting Digital <span class="gradient-text">Experiences</span></h2>
+        </div>
 
-<div onclick="openModal('Shoe Animation UI','High-impact product animation.','https://www.linkedin.com/posts/manisha-s-b005b3317_i-designed-this-shoe-animation-in-figma-as-activity-7398621219358437376-d-ex')"
-class="glass rounded-3xl overflow-hidden cursor-pointer hover:-translate-y-4 transition reveal">
-<div class="h-60 flex items-center justify-center text-8xl bg-gradient-to-br from-gray-600 to-gray-900">👟</div>
-<div class="p-8">
-<h3 class="text-2xl font-semibold mb-3">Shoe Animation UI</h3>
-<p class="text-gray-700 dark:text-gray-400">Motion-focused design.</p>
-</div>
-</div>
+        <!-- Grid -->
+        <div class="about-grid">
+          <!-- Left: Text -->
+          <div class="about-text reveal">
+            <p>
+              I completed a 3-month UI/UX Design course at
+              <span class="highlight">Natieva</span> and
+              <span class="highlight">Accenture Digital Skills</span> in UX.
+              I have hands-on experience designing mobile applications and animated websites.
+            </p>
+            <p>
+              I work with <span class="cyan">Figma</span>, <span class="cyan">Canva</span>, and
+              <span class="cyan">Adobe Illustrator</span> (logo design), and I have basic knowledge
+              of Framer and Adobe Acrobat.
+            </p>
+            <p>
+              I enjoy creating interactive UI experiences and smooth animations, and I'm continuously
+              improving my skills through practical projects.
+            </p>
+          </div>
 
-</div>
-</section>
+          <!-- Right: Cards -->
+          <div class="about-cards">
+            <!-- Education -->
+            <div class="skill-card gradient-border about-card reveal">
+              <div class="about-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/>
+                  <path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>
+                </svg>
+              </div>
+              <div class="about-card-body">
+                <h3>Education</h3>
+                <p>3-month UI/UX Design course at Natieva + Accenture Digital Skills in UX</p>
+              </div>
+            </div>
 
-<!-- CONNECT -->
-<section class="py-32 px-6 reveal">
-<div class="max-w-6xl mx-auto glass p-16 rounded-[2.5rem] border border-white/20 text-center">
-<h2 class="text-5xl font-bold mb-6">Let’s Connect</h2>
-<p class="text-xl text-gray-700 dark:text-gray-400 mb-16">
-I'm always open to discussing new opportunities or creative ideas.
-</p>
+            <!-- Experience -->
+            <div class="skill-card gradient-border about-card reveal">
+              <div class="about-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                  <rect width="20" height="14" x="2" y="6" rx="2"/>
+                </svg>
+              </div>
+              <div class="about-card-body">
+                <h3>Experience</h3>
+                <p>Designing mobile applications and animated websites with interactive UI</p>
+              </div>
+            </div>
 
-<div class="grid md:grid-cols-3 gap-10 mb-20">
-<a href="mailto:manisha260504@gmail.com" class="glass p-8 rounded-3xl hover:-translate-y-2 transition">
-📧<div class="mt-4 font-medium">manisha260504@gmail.com</div>
-</a>
-<a href="tel:9342926952" class="glass p-8 rounded-3xl hover:-translate-y-2 transition">
-📞<div class="mt-4 font-medium">+91 93429 26952</div>
-</a>
-<a href="https://www.linkedin.com/in/manisha-s-b005b3317" target="_blank"
-class="glass p-8 rounded-3xl hover:-translate-y-2 transition">
-💼<div class="mt-4 font-medium">LinkedIn →</div>
-</a>
-</div>
+            <!-- Passion -->
+            <div class="skill-card gradient-border about-card reveal">
+              <div class="about-card-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                </svg>
+              </div>
+              <div class="about-card-body">
+                <h3>Passion</h3>
+                <p>Creating interactive UI experiences and continuously improving through projects</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<a href="https://www.figma.com/design/sm8KAJ8XVKeBdynXa7UZe9/practice?node-id=0-1&p=f&t=rvPQDJKDxRYen5uS-0"
-target="_blank"
-class="inline-block px-10 py-5 rounded-full bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition">
-View My Complete Work →
-</a>
-</div>
-</section>
+    <!-- ============================================================
+         SKILLS SECTION
+    ============================================================ -->
+    <section id="skills">
+      <div class="section-container">
+        <!-- Header -->
+        <div class="skills-header reveal">
+          <span class="section-label">My Expertise</span>
+          <h2 class="section-title">Skills &amp; <span class="gradient-text">Tools</span></h2>
+        </div>
 
-<!-- MODAL -->
-<div id="modal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-50 px-6">
-<div class="glass max-w-lg w-full p-8 rounded-3xl relative">
-<button onclick="closeModal()" class="absolute top-4 right-4">✕</button>
-<h3 id="mTitle" class="text-3xl font-bold mb-4"></h3>
-<p id="mDesc" class="mb-6 text-gray-700 dark:text-gray-400"></p>
-<a id="mLink" target="_blank" class="text-indigo-500 font-medium">
-View on LinkedIn →
-</a>
-</div>
-</div>
+        <!-- Skills Grid -->
+        <div class="skills-grid">
+          <!-- UI Design -->
+          <div class="skill-card gradient-border reveal">
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                  <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                  <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                  <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+                </svg>
+              </div>
+              <div class="skill-item-body">
+                <h3>UI Design</h3>
+                <p>Beautiful visual interfaces</p>
+              </div>
+            </div>
+          </div>
 
-<footer class="py-12 text-center text-gray-600 dark:text-gray-500">
-© 2026 Manisha S — UI/UX Designer
-</footer>
+          <!-- UX Design -->
+          <div class="skill-card gradient-border reveal">
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="3" rx="2"/>
+                  <path d="M3 9h18"/><path d="M9 21V9"/>
+                </svg>
+              </div>
+              <div class="skill-item-body">
+                <h3>UX Design</h3>
+                <p>User-centered experiences</p>
+              </div>
+            </div>
+          </div>
 
-<script>
-/* Cursor */
-const cursor = document.getElementById("cursor");
-document.addEventListener("mousemove", e => {
-cursor.style.left = e.clientX + "px";
-cursor.style.top = e.clientY + "px";
-});
+          <!-- Wireframing -->
+          <div class="skill-card gradient-border reveal">
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"/>
+                  <path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/>
+                  <path d="m2.3 2.3 7.286 7.286"/><circle cx="11" cy="11" r="2"/>
+                </svg>
+              </div>
+              <div class="skill-item-body">
+                <h3>Wireframing</h3>
+                <p>Structural blueprints</p>
+              </div>
+            </div>
+          </div>
 
-/* Toggle */
-const toggle = document.getElementById("toggle");
-toggle.onclick = () => {
-document.documentElement.classList.toggle("dark");
-toggle.innerText = document.documentElement.classList.contains("dark")
-? "🌙 Dark Mode" : "☀️ Light Mode";
-};
+          <!-- Prototyping -->
+          <div class="skill-card gradient-border reveal">
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+                  <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/>
+                  <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>
+                </svg>
+              </div>
+              <div class="skill-item-body">
+                <h3>Prototyping</h3>
+                <p>Interactive mockups</p>
+              </div>
+            </div>
+          </div>
 
-/* Reveal */
-document.querySelectorAll(".reveal").forEach(el => {
-new IntersectionObserver(e => {
-if (e[0].isIntersecting) el.classList.add("show");
-},{threshold:.15}).observe(el);
-});
+          <!-- Interaction Design -->
+          <div class="skill-card gradient-border reveal">
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4.037 4.688a.495.495 0 0 1 .651-.651l16 6.5a.5.5 0 0 1-.063.947l-6.124 1.58a2 2 0 0 0-1.438 1.435l-1.579 6.126a.5.5 0 0 1-.947.063z"/>
+                </svg>
+              </div>
+              <div class="skill-item-body">
+                <h3>Interaction Design</h3>
+                <p>Engaging user flows</p>
+              </div>
+            </div>
+          </div>
 
-/* Modal */
-function openModal(t,d,l){
-modal.classList.remove("hidden");
-modal.classList.add("flex");
-mTitle.innerText=t; mDesc.innerText=d; mLink.href=l;
-}
-function closeModal(){ modal.classList.add("hidden"); }
-</script>
+          <!-- Micro Animations -->
+          <div class="skill-card gradient-border reveal">
+            <div class="skill-item">
+              <div class="skill-item-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+                  <path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>
+                </svg>
+              </div>
+              <div class="skill-item-body">
+                <h3>Micro Animations</h3>
+                <p>Delightful motion design</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tool Progress Bars -->
+        <div class="tools-section reveal">
+          <h3 class="tools-title">Tools I Work With</h3>
+          <div class="tool-bars">
+            <div class="tool-bar-item">
+              <div class="tool-bar-header">
+                <span>Figma</span>
+                <span>90%</span>
+              </div>
+              <div class="tool-bar-track">
+                <div class="tool-bar-fill" data-width="90%" style="width: 0%;"></div>
+              </div>
+            </div>
+            <div class="tool-bar-item">
+              <div class="tool-bar-header">
+                <span>Canva</span>
+                <span>85%</span>
+              </div>
+              <div class="tool-bar-track">
+                <div class="tool-bar-fill" data-width="85%" style="width: 0%;"></div>
+              </div>
+            </div>
+            <div class="tool-bar-item">
+              <div class="tool-bar-header">
+                <span>Adobe Illustrator</span>
+                <span>75%</span>
+              </div>
+              <div class="tool-bar-track">
+                <div class="tool-bar-fill" data-width="75%" style="width: 0%;"></div>
+              </div>
+            </div>
+            <div class="tool-bar-item">
+              <div class="tool-bar-header">
+                <span>Framer</span>
+                <span>60%</span>
+              </div>
+              <div class="tool-bar-track">
+                <div class="tool-bar-fill" data-width="60%" style="width: 0%;"></div>
+              </div>
+            </div>
+            <div class="tool-bar-item">
+              <div class="tool-bar-header">
+                <span>Adobe Acrobat</span>
+                <span>70%</span>
+              </div>
+              <div class="tool-bar-track">
+                <div class="tool-bar-fill" data-width="70%" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         PROJECTS SECTION
+    ============================================================ -->
+    <section id="projects">
+      <div class="section-container">
+        <!-- Header -->
+        <div class="projects-header reveal">
+          <span class="section-label">My Work</span>
+          <h2 class="section-title">Featured <span class="gradient-text">Projects</span></h2>
+          <p>Explore my collection of mobile applications and animated websites designed with attention to detail and user experience.</p>
+        </div>
+
+        <!-- Grid -->
+        <div class="projects-grid">
+
+          <!-- Food Delivery App -->
+          <div class="project-card reveal">
+            <div class="project-img-wrap portrait">
+              <img src="https://royal-flow-showcase.lovable.app/assets/food-delivery-app-DFfbBk5D.png" alt="Food Delivery App" loading="lazy">
+              <div class="project-img-overlay"></div>
+              <div class="project-badge mobile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+                  <path d="M12 18h.01"/>
+                </svg>
+                Mobile Application
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Food Delivery App</h3>
+              <p>UI/UX + Interaction Design for a seamless food ordering experience</p>
+              <a href="https://embed.figma.com/proto/sm8KAJ8XVKeBdynXa7UZe9/practice?page-id=0%3A1&node-id=396-1356&viewport=4083%2C831%2C0.13&scaling=scale-down&content-scaling=fixed&starting-point-node-id=396%3A1356&embed-host=share"
+                target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>View Prototype</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"/><path d="M10 14 21 3"/>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Travel Booking App -->
+          <div class="project-card reveal">
+            <div class="project-img-wrap portrait">
+              <img src="https://royal-flow-showcase.lovable.app/assets/travel-booking-app-IHJsIx7i.png" alt="Travel Booking App" loading="lazy">
+              <div class="project-img-overlay"></div>
+              <div class="project-badge mobile">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+                  <path d="M12 18h.01"/>
+                </svg>
+                Mobile Application
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Travel Booking App</h3>
+              <p>UI/UX + Interaction Design for booking travel experiences</p>
+              <a href="https://embed.figma.com/proto/sm8KAJ8XVKeBdynXa7UZe9/practice?page-id=0%3A1&node-id=329-35&viewport=4083%2C831%2C0.13&scaling=scale-down&content-scaling=fixed&starting-point-node-id=329%3A35&embed-host=share"
+                target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>View Prototype</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"/><path d="M10 14 21 3"/>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Ice Cream Website -->
+          <div class="project-card reveal">
+            <div class="project-img-wrap landscape">
+              <img src="https://royal-flow-showcase.lovable.app/assets/ice-cream-website-DXKG2qXo.png" alt="Ice Cream Website" loading="lazy">
+              <div class="project-img-overlay"></div>
+              <div class="project-badge website">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="3" rx="2"/>
+                  <line x1="8" x2="16" y1="21" y2="21"/>
+                  <line x1="12" x2="12" y1="17" y2="21"/>
+                </svg>
+                Website + Animation
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Ice Cream Website</h3>
+              <p>UI + Animations for a delightful ice cream brand</p>
+              <a href="https://embed.figma.com/proto/yvLKoPFODo7lfAjvYgHEDR/manisha-work-2?page-id=0%3A1&node-id=2-2&viewport=40%2C321%2C0.09&scaling=scale-down&content-scaling=fixed&starting-point-node-id=2%3A149&embed-host=share"
+                target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>View Prototype</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"/><path d="M10 14 21 3"/>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Cake Website -->
+          <div class="project-card reveal">
+            <div class="project-img-wrap landscape">
+              <img src="https://royal-flow-showcase.lovable.app/assets/cake-website-D8aZ-SFT.png" alt="Cake Website" loading="lazy">
+              <div class="project-img-overlay"></div>
+              <div class="project-badge website">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="3" rx="2"/>
+                  <line x1="8" x2="16" y1="21" y2="21"/>
+                  <line x1="12" x2="12" y1="17" y2="21"/>
+                </svg>
+                Website + Animation
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Cake Website</h3>
+              <p>UI + Animations for an elegant bakery experience</p>
+              <a href="https://embed.figma.com/proto/DGC2z6acOeHc2S6gCFd4wK/manisha-work3?page-id=0%3A1&node-id=2001-87&viewport=40%2C287%2C0.12&scaling=scale-down&content-scaling=fixed&embed-host=share"
+                target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>View Prototype</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"/><path d="M10 14 21 3"/>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Bingo Website -->
+          <div class="project-card reveal">
+            <div class="project-img-wrap landscape">
+              <img src="https://royal-flow-showcase.lovable.app/assets/bingo-website-TfXRqUXr.png" alt="Bingo Website" loading="lazy">
+              <div class="project-img-overlay"></div>
+              <div class="project-badge website">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="3" rx="2"/>
+                  <line x1="8" x2="16" y1="21" y2="21"/>
+                  <line x1="12" x2="12" y1="17" y2="21"/>
+                </svg>
+                Website + Animation
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Bingo Website</h3>
+              <p>UI + Animations for a vibrant snack brand</p>
+              <a href="https://embed.figma.com/proto/DGC2z6acOeHc2S6gCFd4wK/manisha-work3?page-id=0%3A1&node-id=2001-169&viewport=40%2C287%2C0.12&scaling=scale-down&content-scaling=fixed&embed-host=share"
+                target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>View Prototype</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"/><path d="M10 14 21 3"/>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Shoe Website -->
+          <div class="project-card reveal">
+            <div class="project-img-wrap landscape">
+              <img src="https://royal-flow-showcase.lovable.app/assets/shoe-website-CmDhYPUs.png" alt="Shoe Website" loading="lazy">
+              <div class="project-img-overlay"></div>
+              <div class="project-badge website">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="20" height="14" x="2" y="3" rx="2"/>
+                  <line x1="8" x2="16" y1="21" y2="21"/>
+                  <line x1="12" x2="12" y1="17" y2="21"/>
+                </svg>
+                Website + Animation
+              </div>
+            </div>
+            <div class="project-info">
+              <h3>Shoe Website</h3>
+              <p>UI + Animations for a modern footwear brand</p>
+              <a href="https://embed.figma.com/proto/DGC2z6acOeHc2S6gCFd4wK/manisha-work3?page-id=0%3A1&node-id=2001-292&viewport=40%2C287%2C0.12&scaling=scale-down&content-scaling=fixed&embed-host=share"
+                target="_blank" rel="noopener noreferrer" class="project-link">
+                <span>View Prototype</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h6v6"/><path d="M10 14 21 3"/>
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         CONTACT SECTION
+    ============================================================ -->
+    <section id="contact">
+      <div class="section-container">
+        <!-- Header -->
+        <div class="contact-header reveal">
+          <span class="section-label">Get In Touch</span>
+          <h2 class="section-title">Let's <span class="gradient-text">Connect</span></h2>
+          <p>Have a project in mind or just want to say hello? I'd love to hear from you!</p>
+        </div>
+
+        <!-- Grid -->
+        <div class="contact-grid">
+          <!-- Left: Info -->
+          <div class="contact-info reveal">
+            <h3>Contact Information</h3>
+            <div class="contact-links">
+              <a href="tel:9342926952" class="contact-link-item">
+                <div class="contact-link-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </div>
+                <div class="contact-link-body">
+                  <p>Phone</p>
+                  <p>9342926952</p>
+                </div>
+              </a>
+
+              <a href="mailto:manisha260504@gmail.com" class="contact-link-item">
+                <div class="contact-link-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="20" height="16" x="2" y="4" rx="2"/>
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  </svg>
+                </div>
+                <div class="contact-link-body">
+                  <p>Email</p>
+                  <p>manisha260504@gmail.com</p>
+                </div>
+              </a>
+
+              <a href="https://www.linkedin.com/in/manisha-s-b005b3317" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+                <div class="contact-link-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                    <rect width="4" height="12" x="2" y="9"/>
+                    <circle cx="4" cy="4" r="2"/>
+                  </svg>
+                </div>
+                <div class="contact-link-body">
+                  <p>LinkedIn</p>
+                  <p>Connect on LinkedIn</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Form -->
+          <form class="contact-form reveal" id="contactForm">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required placeholder="Tell me about your project..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/>
+                <path d="m21.854 2.147-10.94 10.939"/>
+              </svg>
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="section-container">
+      <div class="footer-inner">
+        <p>© 2026 Manisha. All rights reserved.</p>
+        <p class="footer-credit">
+          Designed with
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+          </svg>
+          by Manisha
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    // ─── Mobile Menu ─────────────────────────────────────────────
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburgerBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+    }
+
+    // ─── Scroll Reveal ────────────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ─── Progress Bar Animation ───────────────────────────────────
+    const barFills = document.querySelectorAll('.tool-bar-fill');
+
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fill = entry.target;
+          fill.style.width = fill.dataset.width;
+          barObserver.unobserve(fill);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    barFills.forEach(bar => barObserver.observe(bar));
+
+    // ─── Contact Form ─────────────────────────────────────────────
+    const contactForm = document.getElementById('contactForm');
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = contactForm.querySelector('.btn-submit');
+      btn.textContent = '✓ Message Sent!';
+      btn.style.background = 'linear-gradient(90deg, #22D3EE, #7C5CBF)';
+      setTimeout(() => {
+        btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg> Send Message`;
+        btn.style.background = '';
+        contactForm.reset();
+      }, 3000);
+    });
+  </script>
 
 </body>
 </html>
